@@ -11,7 +11,7 @@ mongoose.connect(configDB.url); // connect to our database
 var Schema = mongoose.Schema,
 ObjectId = Schema.ObjectId;
 var user_token = new Schema({
-	//_id		:false,
+	user_id		:Number,
 	name		:String,
 	createdAt	:Date
 });
@@ -29,6 +29,7 @@ app.get('/track/:token/', function(req, res){
 							var data = mongoose.model('token' + req.params.token, user_token);
 							var n = new data();
 							var now = new Date();
+							n.user_id	= req.param('user');
 							n.name 		= req.param('name');
 							n.createdAt 	= now;
 							n.save(function(err){console.log(err)});

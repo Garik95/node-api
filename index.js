@@ -11,7 +11,7 @@ mongoose.connect(configDB.url); // connect to our database
 var Schema = mongoose.Schema,
 ObjectId = Schema.ObjectId;
 var user_token = new Schema({
-	_id		:ObjectId,
+	//_id		:false,
 	name		:String,
 	createdAt	:Date
 });
@@ -19,9 +19,24 @@ var user_token = new Schema({
 //var Person = mongoose.model('', yourSchema);
 
 app.get('/track/:token/', function(req, res){
-	mongoose.connection.db.listCollections({'name':'users'})
-		.next(function (err, collinfo){console.log(collinfo); });
-	res.send(req.params);
+	mongoose.connection.db.listCollections({'name':'token' + req.params.token})
+		.next(function (err, collinfo){
+			console.log(collinfo);
+			if(collinfo)
+				{
+					if(req.param('name'))
+						{
+							var data = mongoose.model('token' + req.params.token, user_token);
+							var n = new data();
+							var now = new Date();
+							n.name 		= req.param('name');
+							n.createdAt 	= now;
+							n.save(function(err){console.log(err)});
+							res.send('success');
+						}
+				}
+			else{ res.send('Invalid token...');}
+		 });
 });
 
 app.listen(8888, function (){

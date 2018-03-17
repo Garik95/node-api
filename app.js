@@ -40,6 +40,6 @@ app.get('/track/:token/', function(req, res){
 		 });
 });
 
-app.listen(80, function (){
+app.listen(process.env.PORT, function (){
 	console.log('port - 80');
 });

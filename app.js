@@ -40,6 +40,6 @@ app.get('/track/:token/', function(req, res){
 		 });
 });
 
-app.listen(8888, function (){
-	console.log('port - 8888');
+app.listen(80, function (){
+	console.log('port - 80');
 });

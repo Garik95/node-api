@@ -35,6 +35,7 @@ app.get('/track/:token/', function(req, res){
 							n.save(function(err){console.log(err)});
 							res.send('success');
 						}
+					else {res.send("Specify param");}
 				}
 			else{ res.send('Invalid token...');}
 		 });

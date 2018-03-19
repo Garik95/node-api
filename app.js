@@ -12,7 +12,8 @@ var Schema = mongoose.Schema,
 ObjectId = Schema.ObjectId;
 var user_token = new Schema({
 	user_id		:Number,
-	name		:String,
+	request		:String,
+	ip			:String,	
 	createdAt	:Date
 });
 
@@ -22,13 +23,14 @@ app.get('/track/:token/', function(req, res){
 		.next(function (err, collinfo){
 			if(collinfo)
 				{
-					if(req.param('name'))
+					if(req.param('request'))
 						{
 							var data = mongoose.model('token' + req.params.token, user_token);
 							var n = new data();
 							var now = new Date();
-							n.user_id	= req.param('user');
-							n.name 		= req.param('name');
+							n.user_id		= req.param('user');
+							n.request 		= req.param('request');
+							n.ip	 		= getIp(req);
 							n.createdAt 	= now;
 							n.save(function(err){console.log(err)});
 							res.send('success');

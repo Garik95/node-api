@@ -13,7 +13,8 @@ ObjectId = Schema.ObjectId;
 var user_token = new Schema({
 	user_id		:Number,
 	request		:String,
-	ip			:String,	
+	ip			:String,
+	flg			:Boolean,	
 	createdAt	:Date
 });
 
@@ -31,6 +32,7 @@ app.get('/track/:token/', function(req, res){
 							n.user_id		= req.param('user');
 							n.request 		= req.param('request');
 							n.ip	 		= getIp(req);
+							n.flg			= true;
 							n.createdAt 	= now;
 							n.save(function(err){console.log(err)});
 							res.send('success');

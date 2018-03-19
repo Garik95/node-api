@@ -19,7 +19,7 @@ var user_token = new Schema({
 //var Person = mongoose.model('', yourSchema);
 
 app.get('/track/:token/', function(req, res){
-	console.log(req.connection.remoteAddress)
+	console.log(req.connection)
 	mongoose.connection.db.listCollections({'name':'token' + req.params.token})
 		.next(function (err, collinfo){
 			console.log(collinfo);

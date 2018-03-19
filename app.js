@@ -19,6 +19,7 @@ var user_token = new Schema({
 //var Person = mongoose.model('', yourSchema);
 
 app.get('/track/:token/', function(req, res){
+	console.log(req.connection.remoteAddress)
 	mongoose.connection.db.listCollections({'name':'token' + req.params.token})
 		.next(function (err, collinfo){
 			console.log(collinfo);
@@ -41,6 +42,6 @@ app.get('/track/:token/', function(req, res){
 		 });
 });
 
-app.listen(process.env.PORT, function (){
-	console.log('port - 80');
+app.listen(process.env.PORT || 8888, function (){
+	console.log('port - 8888');
 });

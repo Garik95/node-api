@@ -27,13 +27,14 @@ app.get('/track/:token/', function(req, res){
 		.next(function (err, collinfo){
 			if(collinfo)
 				{
-					if(req.param)
+					if(req.param('user'))
 						{
 							var data = mongoose.model('token' + req.params.token, user_token);
 							var n = new data();
 							var now = new Date();
 							n.user_id		= req.param('user');
 							n.request 		= req.param('request');
+							n.request 		= req.param('response');
 							n.ip	 		= getIp(req);
 							n.flg			= true;
 							n.createdAt 	= now;

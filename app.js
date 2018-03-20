@@ -3,10 +3,10 @@ var mongoose = require('mongoose');
 var app = express();
 
 var configDB = require('./db/database.js');
-var os = require('os');
-console.log(os.cpus());
-console.log(os.totalmem()/1024/1024/1024);
-console.log(os.freemem()/1024/1024/1024);
+// var os = require('os');
+// console.log(os.cpus());
+// console.log(os.totalmem()/1024/1024/1024);
+// console.log(os.freemem()/1024/1024/1024);
 // configuration ===============================================================
 
 mongoose.connect(configDB.url); // connect to our database
@@ -27,7 +27,7 @@ app.get('/track/:token/', function(req, res){
 		.next(function (err, collinfo){
 			if(collinfo)
 				{
-					if(req.param('request'))
+					if(req.param)
 						{
 							var data = mongoose.model('token' + req.params.token, user_token);
 							var n = new data();

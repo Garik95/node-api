@@ -34,7 +34,7 @@ app.get('/track/:token/', function(req, res){
 							var now = new Date();
 							n.user_id		= req.param('user');
 							n.request 		= req.param('request');
-							n.request 		= req.param('response');
+							n.response 		= req.param('response');
 							n.ip	 		= getIp(req);
 							n.flg			= true;
 							n.createdAt 	= now;

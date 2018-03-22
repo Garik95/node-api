@@ -27,20 +27,29 @@ app.get('/track/:token/', function(req, res){
 		.next(function (err, collinfo){
 			if(collinfo)
 				{
-					if(req.param('user'))
-						{
-							var data = mongoose.model('token' + req.params.token, user_token);
-							var n = new data();
-							var now = new Date();
-							n.user_id		= req.param('user');
-							n.request 		= req.param('request');
-							n.response 		= req.param('response');
-							n.ip	 		= getIp(req);
-							n.flg			= true;
-							n.createdAt 	= now;
-							n.save(function(err){console.log(err)});
-							res.send('success');
-						}
+					console.log(req.query);
+					if(Object.keys(req.query).length !== 0)
+					{
+						if(!req.query.request == '')
+							{
+									if(!req.query.user == '' )
+									{
+										var data = mongoose.model('token' + req.params.token, user_token);
+										var n = new data();
+										var now = new Date();
+										n.user_id		= req.param('user');
+										n.request 		= req.param('request');
+										n.response 		= req.param('response');
+										n.ip	 		= getIp(req);
+										n.flg			= true;
+										n.createdAt 	= now;
+										n.save(function(err){console.log(err)});
+										res.send('success');
+									}
+									else res.send("user field is empty");
+							}
+						else res.send("request field is empty");
+					}
 					else {res.send("Specify param");}
 				}
 			else{ res.send('Invalid token...');}

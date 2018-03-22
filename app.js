@@ -32,7 +32,7 @@ app.get('/track/:token/', function(req, res){
 					{
 						if(!req.query.request == '')
 							{
-									if(!req.query.user == '' )
+								if(!req.query.user == '' )
 									{
 										var data = mongoose.model('token' + req.params.token, user_token);
 										var n = new data();
@@ -46,7 +46,7 @@ app.get('/track/:token/', function(req, res){
 										n.save(function(err){console.log(err)});
 										res.send('success');
 									}
-									else res.send("user field is empty");
+								else res.send("user field is empty");
 							}
 						else res.send("request field is empty");
 					}
